@@ -1,1 +1,18 @@
-<div class="text-3xl font-bold underline">Text</div>
+<form class="flex flex-col w-full h-full" (submit)="onSubmit()">
+  <input type="text" class="self-center" [ngModelOptions]="{ standalone: true }" [(ngModel)]="url" />
+  <button class="self-center" type="submit">Submit</button>
+</form>
+
+<div class="flex flex-col w-full h-full" *ngIf="info">
+  <h2>{{ info.title }}</h2>
+  <h4>{{ info.description }}</h4>
+  <h4>Views: {{ info.viewCount }}</h4>
+  <h4>Private: {{ info.isPrivate }}</h4>
+  <img
+    class="self-center"
+    [src]="thumbnail.url"
+    [width]="thumbnail.width"
+    [height]="thumbnail.height"
+    *ngFor="let thumbnail of info.thumbnails"
+  />
+</div>
