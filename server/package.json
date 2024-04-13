@@ -11,7 +11,8 @@
     "add-build": "git add dist"
   },
   "pre-commit": [
-    "build"
+    "build",
+    "add-build"
   ],
   "author": "",
   "license": "ISC",
