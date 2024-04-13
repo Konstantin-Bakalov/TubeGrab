@@ -30,7 +30,7 @@ export class DownloadService {
         const blobUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = blobUrl;
-        a.download = `${title ?? 'media'}${mediaType === 'video' ? '.mp4' : '.mp3'}`;
+        a.download = `${title ?? 'media'}${mediaType === 'video' ? '.mp4' : '.webm'}`;
         document.body.append(a);
         a.click();
         window.URL.revokeObjectURL(blobUrl);
