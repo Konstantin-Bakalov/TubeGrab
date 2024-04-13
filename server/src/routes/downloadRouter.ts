@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { requestHandler } from '../error-handler';
 import ytdl from 'ytdl-core';
+import { PassThrough } from 'stream';
 
 export const downloadRouter = Router();
 
@@ -29,11 +30,18 @@ downloadRouter.get(
   requestHandler(async (req, res) => {
     const url = req.query.url as string;
 
+    const videoStream = new PassThrough();
+
     ytdl(url, { filter: 'audioandvideo', quality: 'highestvideo' })
-      .pipe(res)
+      .pipe(videoStream)
       .on('error', () => {
         throw new Error('Could not load video stream');
       });
+
+    res.setHeader('Content-Type', 'video/mp4');
+    res.setHeader('Content-Disposition', 'attachment; filename="video.mp4"');
+
+    videoStream.pipe(res);
   }),
 );
 
