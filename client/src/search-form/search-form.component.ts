@@ -29,6 +29,8 @@ export class SearchFormComponent {
   }
 
   onSubmit() {
+    this.downloadService.error$.next(undefined);
+
     this.downloadService.getInfo(this.url).subscribe({
       next: (info) => {
         this.info = info;
