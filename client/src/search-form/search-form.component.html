@@ -32,7 +32,14 @@
     </div>
   </form>
 
-  <img *ngIf="loading" src="../assets/pacman.svg" width="50px" height="50px" [class]="'self-center bg-black' + (loading ? 'hidden' : '')" />
+  <img
+    *ngIf="loading"
+    alt="Loading..."
+    src="assets/pacman.svg"
+    width="50px"
+    height="50px"
+    [class]="'self-center bg-black' + (loading ? 'hidden' : '')"
+  />
 
   <app-error *ngIf="errorMessage" class="self-center w-1/3" [message]="errorMessage"></app-error>
 </div>
