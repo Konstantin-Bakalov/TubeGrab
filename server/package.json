@@ -7,15 +7,8 @@
     "start": "nodemon",
     "format": "npx prettier --write .",
     "lint": "eslint --ext .ts . --max-warnings 0",
-    "build": "rimraf dist",
-    "add-build": "git add dist",
-    "actual-build": "tsc"
+    "build": "tsc"
   },
-  "pre-commit": [
-    "build",
-    "actual-build",
-    "add-build"
-  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
