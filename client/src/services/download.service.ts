@@ -25,6 +25,7 @@ export class DownloadService {
 
   public downloadMedia(url: string, mediaType: MediaType, title?: string) {
     this.loading$.next(true);
+    this.error$.next(undefined);
     return this.downloadBlob(url, mediaType).pipe(
       tap((blob) => {
         const blobUrl = window.URL.createObjectURL(blob);

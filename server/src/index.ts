@@ -7,7 +7,8 @@ import { downloadRouter } from './routes/downloadRouter';
 const app = express();
 
 app.use(cors());
-app.use(json());
+app.use(json({ limit: '4.5mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 app.use(downloadRouter);
 
