@@ -1,3 +1,3 @@
 export const environment = {
-  serverUrl: 'http://localhost:3000',
+  serverUrl: 'https://tube-grab.vercel.app',
 };

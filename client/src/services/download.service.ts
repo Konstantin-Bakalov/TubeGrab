@@ -20,7 +20,7 @@ export class DownloadService {
   constructor(private httpClient: HttpClient) {}
 
   private downloadBlob(url: string, mediaType: MediaType) {
-    return this.httpClient.get(`${environment.serverUrl}/${mediaType}/?url=${url}`, { responseType: 'blob' });
+    return this.httpClient.get(`${environment.serverUrl}/${mediaType}?url=${url}`, { responseType: 'blob' });
   }
 
   public downloadMedia(url: string, mediaType: MediaType, title?: string) {
