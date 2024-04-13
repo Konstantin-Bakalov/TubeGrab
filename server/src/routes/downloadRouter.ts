@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { requestHandler } from '../error-handler';
 import ytdl from 'ytdl-core';
+import { PassThrough } from 'stream';
 
 export const downloadRouter = Router();
 
@@ -45,13 +46,17 @@ downloadRouter.get(
   requestHandler(async (req, res) => {
     const url = req.query.url as string;
 
-    res.header('Content-Disposition', 'attachment; filename="audio.webm"');
-    res.header('Content-Type', 'audio/webm');
+    const videoStream = new PassThrough();
+
+    // res.header('Content-Disposition', 'attachment; filename="audio.webm"');
+    // res.header('Content-Type', 'audio/webm');
 
     ytdl(url, { filter: 'audioonly' })
-      .pipe(res)
+      .pipe(videoStream)
       .on('error', () => {
         throw new Error('Could not load audio stream');
       });
+
+    videoStream.pipe(res);
   }),
 );

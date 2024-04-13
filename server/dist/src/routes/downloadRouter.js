@@ -16,6 +16,7 @@ exports.downloadRouter = void 0;
 const express_1 = require("express");
 const error_handler_1 = require("../error-handler");
 const ytdl_core_1 = __importDefault(require("ytdl-core"));
+const stream_1 = require("stream");
 exports.downloadRouter = (0, express_1.Router)();
 exports.downloadRouter.get('/info', (0, error_handler_1.requestHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = req.query.url;
@@ -42,11 +43,13 @@ exports.downloadRouter.get('/video', (0, error_handler_1.requestHandler)((req, r
 })));
 exports.downloadRouter.get('/audio', (0, error_handler_1.requestHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = req.query.url;
-    res.header('Content-Disposition', 'attachment; filename="audio.webm"');
-    res.header('Content-Type', 'audio/webm');
+    const videoStream = new stream_1.PassThrough();
+    // res.header('Content-Disposition', 'attachment; filename="audio.webm"');
+    // res.header('Content-Type', 'audio/webm');
     (0, ytdl_core_1.default)(url, { filter: 'audioonly' })
-        .pipe(res)
+        .pipe(videoStream)
         .on('error', () => {
         throw new Error('Could not load audio stream');
     });
+    videoStream.pipe(res);
 })));
