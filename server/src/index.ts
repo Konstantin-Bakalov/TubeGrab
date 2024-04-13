@@ -2,7 +2,7 @@ import cors from 'cors';
 import express, { json } from 'express';
 import { config } from '../config';
 import { errorHandler } from './middlewares/error-handler';
-import { downloadRouter } from './routes/download';
+import { downloadRouter } from './routes/downloadRouter';
 
 const app = express();
 

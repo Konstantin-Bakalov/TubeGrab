@@ -1,18 +1,12 @@
-<form class="flex flex-col w-full h-full" (submit)="onSubmit()">
-  <input type="text" class="self-center" [ngModelOptions]="{ standalone: true }" [(ngModel)]="url" />
-  <button class="self-center" type="submit">Submit</button>
-</form>
+<div class="flex w-full h-full flex-col justify-start bg-slate-100 pt-6 sm:pt-12">
+  <div class="max-w-screen-lg self-center py-4">
+    <div class="flex flex-col sm:flex-row gap-7 w-full justify-center">
+      <h2 class="font-bold text-center text-6xl text-slate-700 font-display">TubeGrab</h2>
+    </div>
+    <p class="text-center mt-4 font-medium text-slate-500">YouTube Video & Audio Downloader</p>
+  </div>
 
-<div class="flex flex-col w-full h-full" *ngIf="info">
-  <h2>{{ info.title }}</h2>
-  <h4>{{ info.description }}</h4>
-  <h4>Views: {{ info.viewCount }}</h4>
-  <h4>Private: {{ info.isPrivate }}</h4>
-  <img
-    class="self-center"
-    [src]="thumbnail.url"
-    [width]="thumbnail.width"
-    [height]="thumbnail.height"
-    *ngFor="let thumbnail of info.thumbnails"
-  />
+  <app-search-form (infoEmitter)="onInfoEmit($event)"></app-search-form>
+
+  <app-card *ngIf="info && !loading" [info]="info"></app-card>
 </div>

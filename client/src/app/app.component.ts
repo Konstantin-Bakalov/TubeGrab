@@ -1,33 +1,26 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { environment } from '../environment/environment';
-import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { DownloadService, VideoInfo } from '../services/download.service';
+import { CardComponent } from '../card/card.component';
+import { SearchFormComponent } from '../search-form/search-form.component';
 import { CommonModule } from '@angular/common';
-
-interface VideoInfo {
-  title: string;
-  description: string;
-  thumbnails: { url: string; width: number; height: number }[];
-  formats: any[];
-  viewCount: string;
-  isPrivate: boolean;
-}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule],
+  imports: [CardComponent, SearchFormComponent, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
 })
-export class AppComponent {
-  public url: string | undefined = undefined;
+export class AppComponent implements OnInit {
   public info: VideoInfo | undefined = undefined;
+  public loading = false;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private downloadservice: DownloadService) {}
 
-  onSubmit() {
-    this.httpClient.post<VideoInfo>(environment.serverUrl, { url: this.url }).subscribe((result) => (this.info = result));
+  ngOnInit(): void {
+    this.downloadservice.loading$.subscribe((loading) => (this.loading = loading));
+  }
+
+  onInfoEmit(info: VideoInfo) {
+    this.info = info;
   }
 }
