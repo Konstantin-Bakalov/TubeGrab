@@ -29,9 +29,6 @@ downloadRouter.get(
   requestHandler(async (req, res) => {
     const url = req.query.url as string;
 
-    res.header('Content-Disposition', `attachment; filename="video.mp4"`);
-    res.header('Content-Type', 'video/mp4');
-
     ytdl(url, { filter: 'audioandvideo', quality: 'highestvideo' })
       .pipe(res)
       .on('error', () => {
@@ -44,9 +41,6 @@ downloadRouter.get(
   '/audio',
   requestHandler(async (req, res) => {
     const url = req.query.url as string;
-
-    res.header('Content-Disposition', 'attachment; filename="audio.webm"');
-    res.header('Content-Type', 'audio/webm');
 
     ytdl(url, { filter: 'audioonly' })
       .pipe(res)
