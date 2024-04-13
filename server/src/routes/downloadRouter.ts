@@ -48,8 +48,8 @@ downloadRouter.get(
 
     const videoStream = new PassThrough();
 
-    // res.header('Content-Disposition', 'attachment; filename="audio.webm"');
-    // res.header('Content-Type', 'audio/webm');
+    res.header('Content-Disposition', 'attachment; filename="audio.webm"');
+    res.header('Content-Type', 'audio/webm');
 
     ytdl(url, { filter: 'audioonly' })
       .pipe(videoStream)
