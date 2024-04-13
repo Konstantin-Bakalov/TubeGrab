@@ -44,6 +44,7 @@ export class DownloadService {
 
   public getInfo(url: string) {
     this.loading$.next(true);
+    this.error$.next(undefined);
     return this.httpClient.get<VideoInfo>(`${environment.serverUrl}/info?url=${url}`).pipe(tap(() => this.loading$.next(false)));
   }
 }
