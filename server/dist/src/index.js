@@ -35,9 +35,6 @@ const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use((0, express_1.json)());
 app.use(downloadRouter_1.downloadRouter);
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'works ' });
-});
 const port = config_1.config.port;
 app.listen(port, () => console.log(`Listening on ${port}`));
 app.use(error_handler_1.errorHandler);
