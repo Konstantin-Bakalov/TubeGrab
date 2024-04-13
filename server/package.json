@@ -3,19 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "scripts": {
     "start": "nodemon",
     "format": "npx prettier --write .",
     "lint": "eslint --ext .ts . --max-warnings 0",
     "build": "rimraf dist && tsc",
-    "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist"
   },
+  "pre-commit": [
+    "build"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
