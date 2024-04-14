@@ -32,6 +32,8 @@ exports.downloadRouter.get('/info', (0, error_handler_1.requestHandler)((req, re
 })));
 exports.downloadRouter.get('/video', (0, error_handler_1.requestHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = req.query.url;
+    res.header('Content-Disposition', `attachment; filename="video.mp4"`);
+    res.header('Content-Type', 'video/mp4');
     (0, ytdl_core_1.default)(url, { filter: 'audioandvideo', quality: 'highestvideo' })
         .pipe(res)
         .on('error', () => {
@@ -40,6 +42,8 @@ exports.downloadRouter.get('/video', (0, error_handler_1.requestHandler)((req, r
 })));
 exports.downloadRouter.get('/audio', (0, error_handler_1.requestHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = req.query.url;
+    res.header('Content-Disposition', 'attachment; filename="audio.webm"');
+    res.header('Content-Type', 'audio/webm');
     (0, ytdl_core_1.default)(url, { filter: 'audioonly' })
         .pipe(res)
         .on('error', () => {
