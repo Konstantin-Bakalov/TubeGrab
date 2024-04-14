@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ErrorComponent } from '../error/error.component';
 import { Subject, takeUntil } from 'rxjs';
-import { errorMessage } from '../card/card.component';
+
+const errorMessage = 'Sorry, but the video could not be found.';
 
 @Component({
   selector: 'app-search-form',

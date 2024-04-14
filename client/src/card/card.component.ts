@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DownloadService, MediaType, VideoInfo } from '../services/download.service';
 
-export const errorMessage = 'Sorry, we could not download the requested file. Currently the maximum file size cannot exceed 4.5 Mb';
+const errorMessage = 'Sorry, we could not download the requested file. Currently the maximum file size cannot exceed 4.5 Mb';
 
 @Component({
   selector: 'app-card',
