@@ -41,5 +41,5 @@
     [class]="'self-center bg-black' + (loading ? 'hidden' : '')"
   />
 
-  <app-error *ngIf="errorMessage" class="self-center w-1/3" [message]="errorMessage"></app-error>
+  <app-error *ngIf="errorMessage && !loading" class="self-center w-1/3" [message]="errorMessage"></app-error>
 </div>
