@@ -28,20 +28,14 @@
             </span>
 
             <div class="flex flex-col sm:flex-row gap-4 sm:gap-0">
-              <div class="group flex">
-                <button
-                  disabled
-                  class="middle disabled none center mr-4 rounded-full bg-green-500 py-2 px-3 text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                  data-ripple-light="true"
-                  (click)="download('video')"
-                >
-                  Download Video
-                </button>
-                <span
-                  class="group-hover:opacity-100 transition-opacity bg-slate-800 px-5 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-4 mx-auto"
-                  >Downloading videos currently not available</span
-                >
-              </div>
+              <button
+                disabled
+                class="middle disabled none center mr-4 rounded-full bg-green-500 py-2 px-3 text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                data-ripple-light="true"
+                (click)="download('video')"
+              >
+                Download Video
+              </button>
 
               <button
                 class="middle none center mr-4 rounded-full bg-green-500 py-2 px-3 text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
