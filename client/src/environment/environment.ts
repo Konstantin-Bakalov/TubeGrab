@@ -1,3 +1,3 @@
 export const environment = {
-  serverUrl: 'https://tube-grab.vercel.app',
+  serverUrl: 'https://tubegrab-crxv.onrender.com',
 };
