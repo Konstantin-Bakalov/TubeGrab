@@ -3,6 +3,7 @@ import { DownloadService, MediaInfo } from '../services/download.service';
 import { CardComponent } from '../card/card.component';
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { CommonModule } from '@angular/common';
+import { ProgressData } from '../services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   constructor(private downloadservice: DownloadService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.downloadservice.loading$.subscribe((loading) => (this.loading = loading));
   }
 

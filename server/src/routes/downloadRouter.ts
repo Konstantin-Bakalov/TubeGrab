@@ -1,8 +1,21 @@
 import { Router } from 'express';
 import { requestHandler } from '../error-handler';
 import ytdl from 'ytdl-core';
+import { io } from '..';
 
 export const downloadRouter = Router();
+
+interface ProgressData {
+  totalDownloaded: number;
+  totalSize: number;
+}
+
+const downloadEvent = 'download-progress';
+
+const onProgress = (_chunkLen: number, totalDownloaded: number, totalSize: number) => {
+  const data: ProgressData = { totalDownloaded, totalSize };
+  io.emit(downloadEvent, data);
+};
 
 downloadRouter.get(
   '/info',
@@ -29,14 +42,18 @@ downloadRouter.get(
   requestHandler(async (req, res) => {
     const url = req.query.url as string;
 
+    const stream = ytdl(url, { filter: 'audioandvideo', quality: 'highestvideo' });
+
+    stream.on('progress', onProgress);
+
+    stream.on('error', () => {
+      throw new Error('Couldnot load audio stream');
+    });
+
     res.header('Content-Disposition', `attachment; filename="video.mp4"`);
     res.header('Content-Type', 'video/mp4');
 
-    ytdl(url, { filter: 'audioandvideo', quality: 'highestvideo' })
-      .pipe(res)
-      .on('error', () => {
-        throw new Error('Could not load video stream');
-      });
+    stream.pipe(res);
   }),
 );
 
@@ -45,13 +62,17 @@ downloadRouter.get(
   requestHandler(async (req, res) => {
     const url = req.query.url as string;
 
+    const stream = ytdl(url, { filter: 'audioonly' });
+
+    stream.on('progress', onProgress);
+
+    stream.on('error', () => {
+      throw new Error('Could not load audio stream');
+    });
+
     res.header('Content-Disposition', 'attachment; filename="audio.webm"');
     res.header('Content-Type', 'audio/webm');
 
-    ytdl(url, { filter: 'audioonly' })
-      .pipe(res)
-      .on('error', () => {
-        throw new Error('Could not load audio stream');
-      });
+    stream.pipe(res);
   }),
 );

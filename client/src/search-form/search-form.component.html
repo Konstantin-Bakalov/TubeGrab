@@ -32,11 +32,12 @@
     </div>
   </form>
 
-  <div [class]="'flex flex-col self-center p-6' + (loading ? 'hidden' : '')" *ngIf="loading">
+  <div [class]="'flex flex-col w-full align-middle self-center p-6' + (loading ? 'hidden' : '')" *ngIf="loading">
     <img alt="Loading..." src="assets/pacman.svg" width="50px" height="50px" class="self-center" />
-    <h2 class="font-bold text-center text-xl text-slate-700 font-display">
-      Please be patient, the server may take up to two minutes to respond
-    </h2>
+    <div *ngIf="socketService.getProgressData() | async as progressData" class="self-center flex justify-center">
+      <h2 class="font-bold text-xl text-slate-700">Downloading</h2>
+      <h2 class="font-bold text-xl text-slate-700 align-middle w-16 text-center">{{ convertToPercentage(progressData) }}%</h2>
+    </div>
   </div>
 
   <app-error *ngIf="errorMessage && !loading" class="self-center w-1/3" [message]="errorMessage"></app-error>

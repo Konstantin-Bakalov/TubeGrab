@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ErrorComponent } from '../error/error.component';
 import { Subject, takeUntil } from 'rxjs';
+import { ProgressData, SocketService } from '../services/socket.service';
 
 const errorMessage = 'Sorry, but the video could not be found.';
 
@@ -22,11 +23,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   @Output() infoEmitter = new EventEmitter<MediaInfo>();
 
-  constructor(private downloadService: DownloadService) {}
+  constructor(
+    private downloadService: DownloadService,
+    public socketService: SocketService,
+  ) {}
 
   ngOnInit() {
     this.downloadService.loading$.pipe(takeUntil(this.destroy$)).subscribe((loading) => (this.loading = loading));
     this.downloadService.error$.pipe(takeUntil(this.destroy$)).subscribe((errorMessage) => (this.errorMessage = errorMessage));
+    this.socketService.connect();
   }
 
   ngOnDestroy() {
@@ -47,5 +52,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.downloadService.error$.next(errorMessage);
       },
     });
+  }
+
+  convertToPercentage(progress: ProgressData) {
+    return ((progress.totalDownloaded / progress.totalSize) * 100).toFixed(0);
   }
 }
