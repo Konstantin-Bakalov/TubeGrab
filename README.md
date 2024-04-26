@@ -1,8 +1,11 @@
 ## TubeGrab
+
 - A website for downloading video & audio from YouTube
 - Live demo: https://konstantin-bakalov.github.io/tube-grab-client/
-- The server is deployed on render.com for free, so it may be slow and take a few minutes to wake up
+- The server is deployed on a raspberry pi 3B+ running ngrok free tier, so it may be a bit slow
+
 ## Tech stack
+
 - Augular, TailwindCSS
 - Express, Typescript
-- Vercel, Github pages
+- ngrok, Github pages
