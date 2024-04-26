@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { DownloadService, VideoInfo } from '../services/download.service';
+import { DownloadService, MediaInfo } from '../services/download.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ErrorComponent } from '../error/error.component';
@@ -15,12 +15,12 @@ const errorMessage = 'Sorry, but the video could not be found.';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
   public url: string = '';
-  public info: VideoInfo | undefined = undefined;
+  public info: MediaInfo | undefined = undefined;
   public loading = false;
   public errorMessage: string | undefined = undefined;
   private destroy$ = new Subject<void>();
 
-  @Output() infoEmitter = new EventEmitter<VideoInfo>();
+  @Output() infoEmitter = new EventEmitter<MediaInfo>();
 
   constructor(private downloadService: DownloadService) {}
 

@@ -1,15 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { BehaviorSubject, tap } from 'rxjs';
 
-export interface VideoInfo {
+export interface MediaInfo {
   title: string;
   thumbnails: { url: string; width: number; height: number }[];
   viewCount: string;
 }
 
 export type MediaType = 'video' | 'audio';
+
+const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
 
 @Injectable({ providedIn: 'root' })
 export class DownloadService {
@@ -20,7 +22,7 @@ export class DownloadService {
   constructor(private httpClient: HttpClient) {}
 
   private downloadBlob(url: string, mediaType: MediaType) {
-    return this.httpClient.get(`${environment.serverUrl}/${mediaType}?url=${url}`, { responseType: 'blob' });
+    return this.httpClient.get(`${environment.serverUrl}/${mediaType}?url=${url}`, { responseType: 'blob', headers });
   }
 
   public downloadMedia(url: string, mediaType: MediaType, title?: string) {
@@ -44,6 +46,8 @@ export class DownloadService {
 
   public getInfo(url: string) {
     this.loading$.next(true);
-    return this.httpClient.get<VideoInfo>(`${environment.serverUrl}/info?url=${url}`).pipe(tap(() => this.loading$.next(false)));
+    return this.httpClient
+      .get<MediaInfo>(`${environment.serverUrl}/info?url=${url}`, { headers })
+      .pipe(tap(() => this.loading$.next(false)));
   }
 }

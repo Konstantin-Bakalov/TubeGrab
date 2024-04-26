@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DownloadService, VideoInfo } from '../services/download.service';
+import { DownloadService, MediaInfo } from '../services/download.service';
 import { CardComponent } from '../card/card.component';
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  public info: VideoInfo | undefined = undefined;
+  public info: MediaInfo | undefined = undefined;
   public loading = false;
 
   constructor(private downloadservice: DownloadService) {}
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     this.downloadservice.loading$.subscribe((loading) => (this.loading = loading));
   }
 
-  onInfoEmit(info: VideoInfo) {
+  onInfoEmit(info: MediaInfo) {
     this.info = info;
   }
 }
