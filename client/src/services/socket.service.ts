@@ -16,7 +16,7 @@ export class SocketService {
   private progressData: Observable<ProgressData>;
 
   constructor() {
-    this.socket = io(environment.serverUrl);
+    this.socket = io(environment.serverUrl, { extraHeaders: { 'ngrok-skip-browser-warning': 'true' } });
     this.progressData = new Observable<ProgressData>((subscriber) => {
       this.socket.on(downloadEvent, (data: ProgressData) => {
         subscriber.next(data);

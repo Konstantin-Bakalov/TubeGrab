@@ -1,4 +1,3 @@
 export const environment = {
-  // serverUrl: 'https://0a40-5-147-251-186.ngrok-free.app',
-  serverUrl: 'http://localhost:3000',
+  serverUrl: 'https://48c0-5-147-251-186.ngrok-free.app',
 };
