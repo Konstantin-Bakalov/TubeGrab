@@ -8,4 +8,4 @@
 
 - Augular, TailwindCSS
 - Express, Typescript
-- ngrok, Github pages
+- ngrok, render.com
