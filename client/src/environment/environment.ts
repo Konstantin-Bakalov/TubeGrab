@@ -1,3 +1,3 @@
 export const environment = {
-  serverUrl: 'https://moral-hardly-coyote.ngrok-free.app',
+  serverUrl: 'https://singular-wildcat-radically.ngrok-free.app',
 };
